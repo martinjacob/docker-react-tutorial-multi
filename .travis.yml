@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t mjacob/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run mjacob/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t mjacob/multi-client ./client
+  - docker build -t mjacob/multi-nginx ./nginx
+  - docker build -t mjacob/multi-server ./server
+  - docker build -t mjacob/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+
+  - docker push mjacob/multi-client
+  - docker push mjacob/multi-nginx
+  - docker push mjacob/multi-server
+  - docker push mjacob/multi-worker
