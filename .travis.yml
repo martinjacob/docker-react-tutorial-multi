@@ -21,15 +21,15 @@ after_success:
   - docker push mjacob/multi-server
   - docker push mjacob/multi-worker
 
-deploy:
-  provider: elasticbeanstalk
-  region: "ca-central-1"
-  app: "multi-docker"
-  env: "MultiDocker-env"
-  bucket_name: "elasticbeanstalk-ca-central-1-094336088425"
-  bucket_path: "docker-multi-tutorial"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+#deploy:
+#  provider: elasticbeanstalk
+#  region: "ca-central-1"
+#  app: "multi-docker"
+#  env: "MultiDocker-env"
+#  bucket_name: "elasticbeanstalk-ca-central-1-094336088425"
+#  bucket_path: "docker-multi-tutorial"
+#  on:
+#    branch: master
+#  access_key_id: $AWS_ACCESS_KEY
+#  secret_access_key:
+#    secure: "$AWS_SECRET_KEY"
